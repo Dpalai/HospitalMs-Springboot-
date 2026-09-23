@@ -2,6 +2,8 @@ package com.example.HMS.controllers;
 
 
 import com.example.HMS.model.Patient;
+import com.example.HMS.service.PatientService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,34 +12,42 @@ import java.util.List;
 @RequestMapping("/api/V1/Patients")
 public class PatientController {
 
+    // connecting with the service layer
+    @Autowired
+    private PatientService patientService;
 
-    @GetMapping
-    public List<Patient> getAllPatient(){
-        System.out.println("all Patients");
-        return null;
-    }
+
 
     @PostMapping
     public Patient CreatePatient(@RequestBody Patient patient){
-        System.out.println("creating patients");
-        return null;
+        //System.out.println("creating patients");
+        return patientService.CreatePatient(patient);
     }
+
+    @GetMapping
+    public List<Patient> getAllPatient(){
+        //System.out.println("all Patients");
+        return patientService.getAllPatient();
+    }
+
 
     @GetMapping("/{id}")
     public Patient GetPatintById(@PathVariable Long id){
-        System.out.println("get Patint by id");
-        return null ;
+        //System.out.println("get Patint by id");
+        return patientService.getPatientById(id) ;
     }
 
     @DeleteMapping("/{id}")
     public void deletPatientById(@PathVariable Long id){
-        System.out.println("deleting patient by id");
+        //System.out.println("deleting patient by id");
+        patientService.deletPatientById(id);
 
     }
 
     @PutMapping("/{id}")
-    public void updatePatientById(@PathVariable Long id){
-        System.out.println("deleting patient by id");
+    public void updatePatientById(@PathVariable Long id,@RequestBody Patient patient){
+        //System.out.println("deleting patient by id");
+        patientService.updatePatientById(id,patient);
 
     }
 

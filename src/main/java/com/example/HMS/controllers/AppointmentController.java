@@ -1,6 +1,8 @@
 package com.example.HMS.controllers;
 
 import com.example.HMS.model.Appointment;
+import com.example.HMS.service.AppointmentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,6 +11,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/V1/Appointments")
 public class AppointmentController {
+    @Autowired
+    private AppointmentService appointmentService;
 
     @GetMapping
     public List<Appointment> getAllAppointment() {

@@ -1,6 +1,8 @@
 package com.example.HMS.controllers;
 
 import com.example.HMS.model.Bill;
+import com.example.HMS.service.BillService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,6 +11,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/V1/Bills")
 public class BillController {
+
+
+    @Autowired
+    private BillService billService;
 
 
     @GetMapping
