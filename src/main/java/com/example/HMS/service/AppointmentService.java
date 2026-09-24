@@ -16,11 +16,11 @@ public class AppointmentService {
     private AppointmentRepository appointmentRepository;
 
 
-    public Appointment CreateBill(Appointment appointment){
+    public Appointment createAppoinment(Appointment appointment){
         try {
             //System.out.println("create Appointment service");
-            appointmentRepository.save(appointment);
-            return  null;
+            return appointmentRepository.save(appointment);
+
         }catch (Exception e){
             e.printStackTrace();
             return null;
@@ -42,12 +42,23 @@ public class AppointmentService {
     public Appointment getAppointmentById(Long id){
         try {
             //System.out.println("get Appointment by id  Service");
+            /*
+
             Optional<Appointment> appointment=appointmentRepository.findById(id);
+            if (appointment.isPresent()){
+                return appointment.get();
+            }
             return null;
+            */
+
+            // (OR we can Do)
+            return appointmentRepository.findById(id).orElse(null);
+
         }catch (Exception e){
             e.printStackTrace();
             return null;
         }
+
     }
 
     public void  deletAppointmentById(Long id){
@@ -59,7 +70,7 @@ public class AppointmentService {
         }
     }
 
-    public void updateAppointmentById(Long id,Appointment updateAppointment){
+    public Appointment updateAppointmentById(Long id,Appointment updateAppointment){
         try {
            // System.out.println("update  Appointment by id   Service");
             Optional<Appointment> existingAppointment=appointmentRepository.findById(id);
@@ -68,9 +79,12 @@ public class AppointmentService {
                 A.setDate(updateAppointment.getDate());
                 A.setDoctorId(updateAppointment.getDoctorId());
                 A.setPatientId(updateAppointment.getPatientId());
+
+                appointmentRepository.save(A);
             }
         }catch (Exception e){
             e.printStackTrace();
         }
+        return  updateAppointment;
     }
 }

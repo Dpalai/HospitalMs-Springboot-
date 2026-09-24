@@ -19,8 +19,8 @@ public class DoctorService {
     public Doctor CreateDoctor(Doctor doctor){
         try {
             //System.out.println("create Doctor service");
-            doctorRepository.save(doctor);
-            return  doctor;
+            return doctorRepository.save(doctor);
+
         }catch (Exception e){
             e.printStackTrace();
             return null;
@@ -43,13 +43,23 @@ public class DoctorService {
     public Doctor getDoctorById(Long id){
         try {
             //System.out.println("get doctor by id  Service");
-            Optional<Doctor> doctor=doctorRepository.findById(id);
+             /*
+
+            Optional<Doctor> doctor = doctorRepository.findById(id);
+            if (doctor.isPresent()){
+                return doctor.get();
+            }
+            return null;
+
+            */
+            // (OR we can Do)
+            return doctorRepository.findById(id).orElse(null);
 
         }catch (Exception e){
             e.printStackTrace();
             return null;
         }
-       return null;
+
     }
 
     public void  deletDoctorById(Long id){
@@ -61,18 +71,22 @@ public class DoctorService {
         }
     }
 
-    public void updateDoctorById(Long id,Doctor updatedDcoctor){
+    public Doctor updateDoctorById(Long id,Doctor updatedDcoctor){
         try {
             //System.out.println("update doctor by id");
             Optional<Doctor> existingDoctor=doctorRepository.findById(id);
             if (existingDoctor.isPresent()){
-                Doctor d=existingDoctor.get();
-                d.setName(updatedDcoctor.getName());
-                d.setSpecialization(updatedDcoctor.getSpecialization());
+                Doctor D = existingDoctor.get();
+                D.setName(updatedDcoctor.getName());
+                D.setSpecialization(updatedDcoctor.getSpecialization());
+
+                doctorRepository.save(D);
+
             }
 
         }catch (Exception e){
             e.printStackTrace();
         }
+        return updatedDcoctor;
     }
 }

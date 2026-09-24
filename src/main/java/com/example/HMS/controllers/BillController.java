@@ -19,31 +19,36 @@ public class BillController {
 
     @GetMapping
     public List<Bill> getAllBill() {
-        System.out.println("all BIlls");
-        return null;
+        //System.out.println("all BIlls");
+        return billService.getAllBill();
+
     }
 
     @PostMapping
     public Bill CreateBill(@RequestBody Bill bill) {
-        System.out.println("creating Bills");
-        return null;
+        //System.out.println("creating Bills");
+        return billService.createBill(bill);
+
     }
 
     @GetMapping("/{id}")
     public Bill GetBillById(@PathVariable Long id) {
-        System.out.println("get Bill by id");
-        return null;
+       // System.out.println("get Bill by id");
+        return billService.getBillById(id);
+
     }
 
     @DeleteMapping("/{id}")
     public void deletBIllById(@PathVariable Long id) {
-        System.out.println("deleting Bill by id");
+        //System.out.println("deleting Bill by id");
+        billService.deletBillById(id);
 
     }
 
     @PutMapping("/{id}")
     public void updateBillById(@PathVariable Long id,@RequestBody Bill bill) {
-        System.out.println("deleting Bill by id");
+        //System.out.println("deleting Bill by id");
+        billService.updateBillById(id,bill);
 
     }
 }

@@ -16,31 +16,36 @@ public class AppointmentController {
 
     @GetMapping
     public List<Appointment> getAllAppointment() {
-        System.out.println("all Appointments");
-        return null;
+        //System.out.println("all Appointments");
+        return appointmentService.getAllAppointment();
+
     }
 
     @PostMapping
     public Appointment CreateAppointment(@RequestBody Appointment appointment) {
-        System.out.println("creating Appointment");
-        return null;
+       // System.out.println("creating Appointment");
+        return appointmentService.createAppoinment(appointment);
+
     }
 
     @GetMapping("/{id}")
     public Appointment GetAppointmentById(@PathVariable Long id) {
-        System.out.println("get Appointment by id");
-        return null;
+        //System.out.println("get Appointment by id");
+        return appointmentService.getAppointmentById(id);
+
     }
 
     @DeleteMapping("/{id}")
     public void deletAppointmentById(@PathVariable Long id) {
-        System.out.println("deleting Appointment by id");
+        //System.out.println("deleting Appointment by id");
+        appointmentService.deletAppointmentById(id);
 
     }
 
     @PutMapping("/{id}")
     public void updateAppointmentById(@PathVariable Long id,@RequestBody Appointment appointment) {
-        System.out.println("deleting Appointment by id");
+        //System.out.println("deleting Appointment by id");
+        appointmentService.updateAppointmentById(id,appointment);
 
     }
 }

@@ -16,31 +16,36 @@ import java.util.List;
 
         @GetMapping
         public List<Doctor> getAllDoctor() {
-            System.out.println("all Doctors");
-            return null;
+            //System.out.println("all Doctors");
+            return doctorService.getAllDoctor();
+
         }
 
         @PostMapping
         public Doctor CreateDoctor(@RequestBody Doctor doctor) {
-            System.out.println("creating Doctors");
-            return null;
+            //System.out.println("creating Doctors");
+            return doctorService.CreateDoctor(doctor);
+
         }
 
         @GetMapping("/{id}")
         public Doctor GetDoctorById(@PathVariable Long id) {
-            System.out.println("get Doctor by id");
-            return null;
+            //System.out.println("get Doctor by id");
+            return doctorService.getDoctorById(id);
+
         }
 
         @DeleteMapping("/{id}")
         public void deletDoctorById(@PathVariable Long id) {
-            System.out.println("deleting Doctor by id");
+            //System.out.println("deleting Doctor by id");
+            doctorService.deletDoctorById(id);
 
         }
 
         @PutMapping("/{id}")
         public void updateDoctorById(@PathVariable Long id,@RequestBody Doctor doctor) {
-            System.out.println("deleting Doctor by id");
+            //System.out.println("deleting Doctor by id");
+            doctorService.updateDoctorById(id,doctor);
 
         }
     }

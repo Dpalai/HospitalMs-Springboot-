@@ -3,6 +3,7 @@ package com.example.HMS.service;
 import com.example.HMS.model.Bill;
 import com.example.HMS.model.Patient;
 import com.example.HMS.repository.BillRepository;
+import org.springframework.beans.BeanInfoFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,11 +19,11 @@ public class BillService {
     private BillRepository billRepository;
 
 
-    public Bill CreateBill(Bill bill){
+    public Bill createBill(Bill bill){
         try {
             //System.out.println("create Bill service");
-            billRepository.save(bill);
-            return  bill;
+            return billRepository.save(bill);
+
         }catch (Exception e){
             e.printStackTrace();
             return null;
@@ -44,12 +45,23 @@ public class BillService {
     public Bill getBillById(Long id){
         try {
             //System.out.println("get bill by id  Service");
+            /*
+
             Optional<Bill> bill=billRepository.findById(id);
+            if (bill.isPresent()){
+                return bill.get();
+            }
             return null;
+            */
+
+            // (OR we can Do)
+            return billRepository.findById(id).orElse(null);
+
         }catch (Exception e){
             e.printStackTrace();
             return null;
         }
+
     }
 
     public void  deletBillById(Long id){
@@ -61,7 +73,7 @@ public class BillService {
         }
     }
 
-    public void updateBillById(Long id,Bill updateBill){
+    public Bill updateBillById(Long id, Bill updateBill){
         try {
             //System.out.println("update  Bill by id   Service");
             Optional<Bill> existingBill=billRepository.findById(id);
@@ -70,9 +82,12 @@ public class BillService {
                 B.setAmount(updateBill.getAmount());
                 B.setPatientId(updateBill.getPatientId());
                 B.setStatus(updateBill.getStatus());
+
+                billRepository.save(B);
             }
         }catch (Exception e){
             e.printStackTrace();
         }
+        return updateBill;
     }
 }

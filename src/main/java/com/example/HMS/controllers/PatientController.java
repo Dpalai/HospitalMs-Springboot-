@@ -33,7 +33,7 @@ public class PatientController {
 
     @GetMapping("/{id}")
     public Patient GetPatintById(@PathVariable Long id){
-        //System.out.println("get Patint by id");
+        System.out.println("get Patint by id");
         return patientService.getPatientById(id) ;
     }
 
@@ -46,7 +46,7 @@ public class PatientController {
 
     @PutMapping("/{id}")
     public void updatePatientById(@PathVariable Long id,@RequestBody Patient patient){
-        //System.out.println("deleting patient by id");
+        //System.out.println("upadating patient by id");
         patientService.updatePatientById(id,patient);
 
     }

@@ -19,8 +19,8 @@ public class PatientService {
     public Patient CreatePatient(Patient patient){
         try {
             //System.out.println("create pateint service");
-            patientRepository.save(patient);
-            return  patient;
+            return patientRepository.save(patient);
+            //return  patient;
         }catch (Exception e){
             e.printStackTrace();
             return null;
@@ -42,13 +42,23 @@ public class PatientService {
     public Patient getPatientById(Long id){
         try {
             //System.out.println("getpatientService");
-             Optional<Patient> patient = patientRepository.findById(id);
+          /*
+
+            Optional<Patient> patient = patientRepository.findById(id);
+            if (patient.isPresent()){
+                return patient.get();
+            }
+            return null;
+
+            */
+            // (OR we can Do)
+            return patientRepository.findById(id).orElse(null);
 
         }catch (Exception e){
             e.printStackTrace();
             return null;
         }
-        return null;
+
     }
 
     public void  deletPatientById(Long id){
@@ -71,7 +81,7 @@ public class PatientService {
                 p.setAge(upadetpatient.getAge());
                 p.setGender(upadetpatient.getGender());
                 patientRepository.save(p);
-                return upadetpatient;
+
             }
 
         }catch (Exception e){
