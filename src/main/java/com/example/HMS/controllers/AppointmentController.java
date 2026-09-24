@@ -39,7 +39,7 @@ public class AppointmentController {
     }
 
     @PutMapping("/{id}")
-    public void updateAppointmentById(@PathVariable Long id) {
+    public void updateAppointmentById(@PathVariable Long id,@RequestBody Appointment appointment) {
         System.out.println("deleting Appointment by id");
 
     }

@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class DoctorService {
 
@@ -16,8 +18,9 @@ public class DoctorService {
 
     public Doctor CreateDoctor(Doctor doctor){
         try {
-            System.out.println("create Doctor service");
-            return  null;
+            //System.out.println("create Doctor service");
+            doctorRepository.save(doctor);
+            return  doctor;
         }catch (Exception e){
             e.printStackTrace();
             return null;
@@ -28,8 +31,9 @@ public class DoctorService {
 
     public List<Doctor> getAllDoctor(){
         try {
-            System.out.println("gell Doctor service");
-            return null;
+            //System.out.println("get all Doctor service");
+            return doctorRepository.findAll();
+
         }catch (Exception e){
             System.out.println("error:"+ e.getMessage());
             return null;
@@ -38,25 +42,35 @@ public class DoctorService {
 
     public Doctor getDoctorById(Long id){
         try {
-            System.out.println("get doctor by id  Service");
-            return null;
+            //System.out.println("get doctor by id  Service");
+            Optional<Doctor> doctor=doctorRepository.findById(id);
+
         }catch (Exception e){
             e.printStackTrace();
             return null;
         }
+       return null;
     }
 
     public void  deletDoctorById(Long id){
         try {
-            System.out.println("delet  Doctor  Service");
+            //System.out.println("delet  Doctor  Service");
+            doctorRepository.deleteById(id);
         }catch (Exception e){
             e.printStackTrace();
         }
     }
 
-    public void updateDoctorById(Long id){
+    public void updateDoctorById(Long id,Doctor updatedDcoctor){
         try {
-            System.out.println("update doctor by id");
+            //System.out.println("update doctor by id");
+            Optional<Doctor> existingDoctor=doctorRepository.findById(id);
+            if (existingDoctor.isPresent()){
+                Doctor d=existingDoctor.get();
+                d.setName(updatedDcoctor.getName());
+                d.setSpecialization(updatedDcoctor.getSpecialization());
+            }
+
         }catch (Exception e){
             e.printStackTrace();
         }

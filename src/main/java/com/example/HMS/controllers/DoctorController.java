@@ -39,7 +39,7 @@ import java.util.List;
         }
 
         @PutMapping("/{id}")
-        public void updateDoctorById(@PathVariable Long id) {
+        public void updateDoctorById(@PathVariable Long id,@RequestBody Doctor doctor) {
             System.out.println("deleting Doctor by id");
 
         }

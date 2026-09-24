@@ -42,7 +42,7 @@ public class BillController {
     }
 
     @PutMapping("/{id}")
-    public void updateBillById(@PathVariable Long id) {
+    public void updateBillById(@PathVariable Long id,@RequestBody Bill bill) {
         System.out.println("deleting Bill by id");
 
     }
